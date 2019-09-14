@@ -1,0 +1,16 @@
+{% extends 'base_layout.html' %}
+
+{% block content%}
+    <p class="one">Travel Blogs List</p>
+    <div class="articles">
+    {% for article in articles %}
+        <div class="article">
+            <a href="{% url 'articles:detail' slug=article.slug %}"><img class ="one" src="{{article.thumb.url}}" alt="Logo" width="400" height="300" class="center"></a>
+            <h2><a href="{% url 'articles:detail' slug=article.slug %}">{{ article.snippet_title }}</a></h2>
+            <p class="two">{{ article.snippet }}</p>
+            <p class="three">{{ article.date }}</p>
+            <p class="author">added by {{ article.author.username }}</p>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

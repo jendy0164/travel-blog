@@ -1,0 +1,142 @@
+body{
+  background-color: white;
+  background-image: : url(/static/o.jpg);
+  background-repeat-y: no-repeat;
+  color: #fff;
+}
+
+body *{
+  font-family: Ubuntu:
+}
+
+h1,h4,h5{
+  font-weight: normal;
+  color: black;
+  margin: 0;
+}
+
+p.one {
+  text-align: center;
+  font-style: italic;
+  color: black;
+  font-size: 30px;
+  margin: 0;
+}
+
+p.two {
+  text-align: center;
+  font-size: 50px;
+  margin: 0;
+}
+
+p.three {
+  font-size: 15px;
+  font-style: italic;
+  margin: 1;
+  color: black;
+}
+
+h2 {
+  font: bold 20px/30px Georgia, serif;
+  color: black;
+}
+
+h3 {
+  font-weight: normal;
+  color: black;
+}
+
+div.body img {
+  width: 2250px;
+  height: 700px;
+}
+
+h6{
+  background-color: #16a085;
+  border: 1px solid;
+  padding: 10px;
+  font-size:200%;
+  margin: 0;
+}
+
+a, a:hover, a:visited{
+  color: black;
+  text-decoration: none;
+}
+
+div.gallery {
+  margin: 5px;
+  border: 1px solid #ccc;
+  float: left;
+  width: 400px;
+}
+
+div.gallery:hover {
+  border: 1px solid #777;
+}
+
+div.gallery img {
+  width: 100%;
+  height: auto;
+}
+
+div.desc {
+  padding: 15px;
+  text-align: center;
+}
+
+img.one {
+  display: block;
+  padding: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Travel Blogs</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+  </head>
+  <body>
+
+    <div class="body">
+      <nav>
+        <ul>
+          {% if user.is_authenticated %}
+          <li>
+            <form class="logout-link" action="{% url 'accounts:logout' %}" method="post">
+              {% csrf_token %}
+              <button type="submit">Logout</button>
+            </form>
+            <form class="create-link" action="{% url 'articles:create' %}" method="post">
+              {% csrf_token %}
+              <button type="submit">Add New Article</button>
+            </form>
+          </li>
+          {% else %}
+          <li>
+            <form class="login-link" action="{% url 'accounts:login' %}" method="post">
+              {% csrf_token %}
+              <button type="submit">Login</button>
+            </form>
+            <form class="signup-link" action="{% url 'accounts:signup' %}" method="post">
+              {% csrf_token %}
+              <button type="submit">Signup</button>
+            </form>
+          </li>
+          {% endif %}
+        </ul>
+      </nav>
+      <a href="{% url 'home' %}"><img src="{%static 'banner2.png'%}" alt="Logo" ></a>
+    </div>
+
+    <h6>Travel Blogs</h6>
+      {% block content %}
+      {% endblock %}
+    </body>
+</html>
